@@ -15,14 +15,15 @@ def detect_faces(img):
 
 cap = cv.VideoCapture(0)
 
-while True:
+tracking = True
+while tracking:
     ret, frame = cap.read()
     frame = detect_faces(frame)
-
     cv.imshow('Video Face Detection', frame)
-
-    if cv.waitKey(1) & 0xFF == ord('q'):
-        break
+    
+    keypress = cv.waitKey(1)
+    if keypress == ord('q'):
+        tracking = False
 
 cap.release()
 cv.destroyAllWindows()
